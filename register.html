@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registrieren</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Registrieren</h2>
+
+  <input id="email" type="email" placeholder="Email" class="input">
+  <input id="password" type="password" placeholder="Passwort" class="input">
+  <input id="confirm-password" type="password" placeholder="Passwort bestätigen" class="input">
+  <button id="register-btn" class="btn">Registrieren</button>
+  
+  <script type="module" src="scripts.js"></script>
+  <script>
+    // Ensure that passwords match before calling window.register()
+    document.getElementById('register-btn').addEventListener('click', function(event) {
+      const password = document.getElementById('password')?.value;
+      const confirmPassword = document.getElementById('confirm-password')?.value;
+      if (password !== confirmPassword) {
+        alert('Die Passwörter stimmen nicht überein.');
+        return;
+      }
+      if (typeof window.register === "function") {
+        window.register();
+      }
+    });
+  </script>
+</body>
+</html>

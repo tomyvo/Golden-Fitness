@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pläne generieren</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="page-title">Pläne generieren</h1>
+    <p class="user-info" id="user"></p>
+    <div class="header-buttons">
+      <button class="btn primary logout-btn" onclick="logout()">Logout</button>
+      <button class="btn primary dashboard-btn" onclick="goDashboard()">Zurück zum Dashboard</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Workout -->
+    <section class="card workout-card">
+      <h2 class="card-title">Workout-Plan generieren</h2>
+      <div class="input-group">
+        <input type="number" class="input workout-experience" id="workout-experience" placeholder="Trainingsdauer in Jahren">
+        <input type="number" class="input workout-weight" id="workout-weight" placeholder="Gewicht in kg">
+        <input type="number" class="input workout-age" id="workout-age" placeholder="Alter">
+        <input type="number" class="input workout-height" id="workout-height" placeholder="Größe in cm">
+        <input type="text" class="input workout-gender" id="workout-gender" placeholder="Geschlecht">
+        <input type="text" class="input workout-split" id="workout-split" placeholder="Split (z.B. Push/Pull/Legs)">
+        <input type="number" class="input workout-frequency" id="workout-frequency" placeholder="Training pro Woche">
+        <input type="text" class="input workout-supplements" id="workout-supplements" placeholder="Ergänzungen">
+      </div>
+
+      <div class="plan-box workout-plan-box">
+        <div class="loader hidden" id="workout-loader"></div>
+        <div class="plan-text" id="workout-plan-display"></div>
+      </div>
+      <div class="plan-buttons">
+        <button class="btn primary" onclick="generateWorkout()">Workout generieren</button>
+        <button class="btn success" onclick="confirmWorkout()">Bestätigen</button>
+      </div>
+
+    </section>
+
+    <!-- Nutrition -->
+    <section class="card nutrition-card">
+      <h2 class="card-title">Nutrition-Plan generieren</h2>
+      <div class="input-group">
+        <input type="number" class="input nutrition-height" id="nutrition-height" placeholder="Größe in cm">
+        <input type="number" class="input nutrition-weight" id="nutrition-weight" placeholder="Gewicht in kg">
+        <input type="number" class="input nutrition-age" id="nutrition-age" placeholder="Alter">
+        <input type="text" class="input nutrition-gender" id="nutrition-gender" placeholder="Geschlecht">
+        <input type="number" class="input nutrition-calories" id="nutrition-calories" placeholder="Kalorienbedarf">
+        <input type="text" class="input nutrition-goal" id="nutrition-goal" placeholder="Ziel (z.B. Muskelaufbau)">
+        <input type="text" class="input nutrition-addition" id="addition" placeholder="Ergänzungen (z. B. Vegan, etc.)">
+      </div>
+
+      <div class="plan-box nutrition-plan-box">
+        <div class="loader hidden" id="nutrition-loader"></div>
+        <div class="plan-text" id="nutrition-plan-display"></div>
+      </div>
+        <div class="plan-buttons">
+          <button class="btn primary" onclick="generateNutrition()">Nutrition generieren</button>
+          <button class="btn success" onclick="confirmNutrition()">Bestätigen</button>
+      </div>
+
+
+    </section>
+  </main>
+
+  <!-- marked.js für Markdown Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="module" src="scripts.js"></script>
+</body>
+</html>

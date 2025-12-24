@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="dashboard-title">Dashboard</h1>
+    <p class="user-info" id="user"></p>
+    <button class="btn logout-btn" onclick="logout()">Logout</button>
+  </header>
+
+  <main class="dashboard-container">
+    <!-- Workout Plan -->
+    <section class="plan-section workout-section">
+      <h2 class="section-title">Workout-Plan</h2>
+      <div class="plan-container workout-plan">
+        <div class="plan-text" id="workout-plan-text">
+          Hier wird dein Workout-Plan angezeigt
+        </div>
+      </div>
+      <a href="generate.html" class="btn generate-btn">Workout-Plan generieren</a>
+    </section>
+
+    <!-- Nutrition Plan -->
+    <section class="plan-section nutrition-section">
+      <h2 class="section-title">Nutrition-Plan</h2>
+      <div class="plan-container nutrition-plan">
+        <div class="plan-text" id="nutrition-plan-text">
+          Hier wird dein Nutrition-Plan angezeigt
+        </div>
+      </div>
+      <a href="generate.html" class="btn generate-btn">Nutrition-Plan generieren</a>
+    </section>
+  </main>
+
+  <!-- marked.js für Markdown Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="module" src="scripts.js"></script>
+</body>
+</html>

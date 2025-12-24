@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Fitness</title>
+  <link rel="stylesheet" href="index_styles.css"> 
+</head>
+<body>
+  <!-- Honeycomb Background -->
+  <div class="honeycomb-background" id="honeycombBg"></div>
+  
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <div class="brand-logo">💪</div>
+          <span class="brand-name">Golden Fitness</span>
+        </div>
+        
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu öffnen">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <div class="nav-menu" id="navMenu">
+          <a href="#products" class="nav-link">Results</a>
+          <a href="#about" class="nav-link">Über uns</a>
+          <a href="#contact" class="nav-link">Kontakt</a>
+          <button class="nav-cart-btn" onclick="login()">
+            <svg class="cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 2L7.17 6M9 2h6m0 0l1.83 4M9 2v4m6-4v4m0 0H9m6 0h3.5L21 16l-1.5 6H4.5L3 16l2.5-10H9m0 0h6M7 22h10"></path>
+            </svg>
+            Log in
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">✨ 100% Natürliche Gains</div>
+        <h1 class="hero-title">
+          Fuel your body<br>
+          <span class="hero-title-accent">Train with purpose</span>
+        </h1>
+        <p class="hero-description">
+          Individuelle Trainings- und Ernährungspläne für echte, nachhaltige Ergebnisse.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="register()">Jetzt registrieren</button>
+          <button class="btn btn-secondary" onclick="login()">Log dich ein</button>
+        </div>
+      </div>
+      
+      <div class="hero-image">
+        <div class="hero-image-wrapper">
+          <img src="bilder\hero_section_picture.jpg" 
+               alt="Natürlicher Honig im Glas" 
+               class="hero-img">
+          <div class="hero-image-gradient"></div>
+        </div>
+        <div class="hero-hexagon"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="about">
+    <div class="features-container">
+      <div class="section-header">
+        <h2 class="section-title">Warum meine WebApp wählen?</h2>
+        <p class="section-subtitle">Qualität, die man spürt</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <div class="hexagon-icon" data-color="#FFC107">
+              <svg class="feature-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="feature-title">Trainiere mit System</h3>
+          <p class="feature-description">Strukturierte Pläne statt Rätselraten im Gym oder in der Küche.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <div class="hexagon-icon" data-color="#FFD54F">
+              <svg class="feature-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 0 1-4.5 4.5z"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="feature-title">Individuell statt Standardpläne</h3>
+          <p class="feature-description">Training und Ernährung angepasst an deinen Körper, dein Ziel und deinen Alltag</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <div class="hexagon-icon" data-color="#FFB300">
+              <svg class="feature-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+          </div>
+          <h3 class="feature-title">Praxisnah umgesetzt</h3>
+          <p class="feature-description">Einfach, realistisch und alltagstauglich</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products" id="products">
+    <div class="products-container">
+      <div class="section-header">
+        <h2 class="section-title">Unsere Testprobanten</h2>
+        <p class="section-subtitle">100% Natürliche Gains</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="bilder/first_example.jpg" 
+                 alt="Daniel" 
+                 class="product-image">
+            <button class="product-favorite" aria-label="Zu Favoriten hinzufügen">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Daniel</h3>
+            <div class="product-rating">
+              <div class="stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="rating-value">(4.9)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">18 yo</span>
+              <button class="product-add-btn">Instagram</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="bilder/second_example.jpg" 
+                 alt="Michael" 
+                 class="product-image">
+            <button class="product-favorite" aria-label="Zu Favoriten hinzufügen">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Michael</h3>
+            <div class="product-rating">
+              <div class="stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="rating-value">(5.0)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">17 yo</span>
+              <button class="product-add-btn">Instagram</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image-wrapper">
+            <img src="bilder/third_example.jpg" 
+                 alt="Julian" 
+                 class="product-image">
+            <button class="product-favorite" aria-label="Zu Favoriten hinzufügen">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Julian</h3>
+            <div class="product-rating">
+              <div class="stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <span class="rating-value">(4.8)</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">21 yo</span>
+              <button class="product-add-btn">Instagram</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="contact">
+    <div class="cta-container">
+      <div class="cta-content">
+        <div class="cta-decorative"></div>
+        <h2 class="cta-title">Bereit für natürliche Gains?</h2>
+        <p class="cta-description">
+          Melde dich für unseren Newsletter an und erhalte Benachrichtigungen an!
+        </p>
+        <form class="cta-form" id="newsletterForm">
+          <input type="email" 
+                 class="cta-input" 
+                 placeholder="Deine E-Mail-Adresse" 
+                 required 
+                 aria-label="E-Mail-Adresse">
+          <button type="submit" class="cta-btn">Anmelden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <div class="footer-brand">
+            <div class="brand-logo">💪</div>
+            <span class="brand-name">Golden Fitness</span>
+          </div>
+          <p class="footer-description">
+            Fuel your body | Train with purpose
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-title">Produkte</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Workout Pläne</a></li>
+            <li><a href="#" class="footer-link">Nutrition Pläne</a></li>
+            <li><a href="#" class="footer-link">Individuelle Beratung</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-title">Unternehmen</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Über uns</a></li>
+            <li><a href="#" class="footer-link">Unsere Imker</a></li>
+            <li><a href="#" class="footer-link">Nachhaltigkeit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4 class="footer-title">Kontakt</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Kontaktformular</a></li>
+            <li><a href="#" class="footer-link">FAQ</a></li>
+            <li><a href="#" class="footer-link">Versand</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Golden Fitness. Alle Rechte vorbehalten.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="index_scripts.js"></script>
+</body>
+</html>
