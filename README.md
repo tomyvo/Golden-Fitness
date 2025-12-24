@@ -95,23 +95,23 @@ No installation. No dependencies. No setup.
 ## 🧩 Core Concepts Explained
 🔐 Navigation & Routing
 
-Page navigation handled via:
+- Page navigation handled via:
 
-window.location.href = "login.html";
+- window.location.href = "login.html";
 
-🧠 State Handling
+## 🧠 State Handling
 
-Simple user state via localStorage
+- Simple user state via localStorage
 
-localStorage.setItem("isLoggedIn", "true");
+- localStorage.setItem("isLoggedIn", "true");
 
-🧼 Clean JavaScript
+## 🧼 Clean JavaScript
 
-No inline JS where possible
+- No inline JS where possible
 
-addEventListener instead of onclick
+- addEventListener instead of onclick
 
-Readable, beginner-friendly logic
+- Readable, beginner-friendly logic
 
 --- 
 
@@ -161,21 +161,26 @@ Commit your changes
 
 Open a pull request
 
-📄 License
+--- 
+
+## 📄 License
 
 This project is licensed under the MIT License – free to use, modify, and distribute.
 
-👤 Author
+---
+
+## 👤 Author
 
 Tomy Vo
 💻 Machine Learning Engineer | Data Scientist | Web Engineer
 
 GitHub: @TomyThanh
 
-Portfolio: coming soon
+Portfolio: tomyvo.github.io
 
-❤️ Final Note
+---
+
+## ❤️ Final Note
 
 This project proves that you don’t need heavy frameworks to build something beautiful, functional, and professional.
-
 Simple. Sustainable. Powerful.
