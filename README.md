@@ -113,31 +113,33 @@ addEventListener instead of onclick
 
 Readable, beginner-friendly logic
 
-🎯 Goals of This Project
+--- 
 
-📚 Learn modern web fundamentals deeply
+## 🎯 Goals of This Project
 
-🧠 Build scalable UI without frameworks
+- 📚 Learn modern web fundamentals deeply
 
-🎨 Create a visually appealing experience
+- 🧠 Build scalable UI without frameworks
 
-💡 Show that simple tech can still look premium
+- 🎨 Create a visually appealing experience
 
-🔮 Future Improvements
+- 💡 Show that simple tech can still look premium
 
-🔐 Authentication logic (real backend)
+- 🔮 Future Improvements
 
-📊 User dashboard
+- 🔐 Authentication logic (real backend)
 
-🥘 Meal planning system
+- 📊 User dashboard
 
-🏋️ Workout generator
+- 🥘 Meal planning system
 
-🌍 Multi-language support
+- 🏋️ Workout generator
 
-🌙 Dark mode toggle
+- 🌍 Multi-language support
 
-📸 Screenshots (optional)
+- 🌙 Dark mode toggle
+
+- 📸 Screenshots (optional)
 
 Add screenshots here to showcase your design
 
