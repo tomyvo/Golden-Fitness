@@ -106,134 +106,202 @@ window.goDashboard = () => {
   }
 })();
 
-// ======================= GENERATE =======================
+// ======================= GENERIEREN =======================
 
 // -------- Loader Helpers --------
 function showLoader(id) {
   const elem = document.getElementById(id);
   if (elem) elem.classList.remove("hidden");
 }
-
 function hideLoader(id) {
   const elem = document.getElementById(id);
   if (elem) elem.classList.add("hidden");
 }
 
+// Hilfsvariablen global für Confirm-Funktionen
+window.workoutMarkdown = null;
+window.nutritionMarkdown = null;
+
 if (window.location.pathname.includes("generate.html")) {
 
-  // ======================= WORKOUT =======================
+  // WORKOUT GENERIEREN
   window.generateWorkout = async () => {
     showLoader("workout-loader");
     const workoutPlanDisplay = document.getElementById("workout-plan-display");
     if (workoutPlanDisplay) {
       workoutPlanDisplay.innerHTML = "";
     }
-
     try {
+      // Session holen
       const { data, error: sessErr } = await supabase.auth.getSession();
       if (sessErr) throw new Error("Fehler beim Authentifizieren: " + sessErr.message);
       const session = data?.session;
       if (!session) throw new Error("Nicht eingeloggt.");
 
+      // Felder validieren
+      const experience = document.getElementById("workout-experience")?.value || "";
+      const weight = document.getElementById("workout-weight")?.value || "";
+      const age = document.getElementById("workout-age")?.value || "";
+      const height = document.getElementById("workout-height")?.value || "";
+      const gender = document.getElementById("workout-gender")?.value || "";
+      const split = document.getElementById("workout-split")?.value || "";
+      const frequency = document.getElementById("workout-frequency")?.value || "";
+      const supplements = document.getElementById("workout-supplements")?.value || "";
+
+      // Plausibilitätscheck
+      if (
+        (age && (isNaN(Number(age)) || Number(age) < 0)) ||
+        (weight && (isNaN(Number(weight)) || Number(weight) < 0)) ||
+        (height && (isNaN(Number(height)) || Number(height) < 0)) ||
+        (experience && (isNaN(Number(experience)) || Number(experience) < 0)) ||
+        (frequency && (isNaN(Number(frequency)) || Number(frequency) < 0))
+      ) {
+        throw new Error("Bitte überprüfe deine Angaben. Nur gültige Werte eingeben (keine negativen Zahlen).");
+      }
+
+      const reqBody = {
+        userId: session.user.id,
+        type: "workout",
+        data: {
+          experience,
+          weight,
+          age,
+          height,
+          gender,
+          split,
+          frequency,
+          supplements
+        }
+      };
+
+      // fetch URL: ggf. anpassen bei Deployment!
       const response = await fetch(
         "http://localhost:5678/webhook/c21aeeab-4ac2-4d90-ba1d-47718184ad8f",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: session.user.id,
-            type: "workout",
-            data: {
-              experience: document.getElementById("workout-experience")?.value || "",
-              weight: document.getElementById("workout-weight")?.value || "",
-              age: document.getElementById("workout-age")?.value || "",
-              height: document.getElementById("workout-height")?.value || "",
-              gender: document.getElementById("workout-gender")?.value || "",
-              split: document.getElementById("workout-split")?.value || "",
-              frequency: document.getElementById("workout-frequency")?.value || "",
-              supplements: document.getElementById("workout-supplements")?.value || ""
-            }
-          })
+          body: JSON.stringify(reqBody)
         }
       );
 
       if (!response.ok) {
-        throw new Error("Workout-Plan konnte nicht generiert werden.");
+        let errorMsg = "Workout-Plan konnte nicht generiert werden.";
+        try {
+          const respErr = await response.json();
+          if (respErr && respErr.error) errorMsg += " " + respErr.error;
+        } catch (e) {}
+        throw new Error(errorMsg);
       }
 
       const result = await response.json();
-      if (!result.plan) throw new Error("Ungültige Antwort vom Server.");
-
-      workoutMarkdown = result.plan;
-      if (workoutPlanDisplay) {
-        workoutPlanDisplay.innerHTML = typeof marked !== "undefined" ? marked.parse(result.plan) : result.plan;
+      if (!result || typeof result.plan !== "string" || !result.plan.length) {
+        throw new Error("Ungültige Antwort vom Server.");
       }
 
+      window.workoutMarkdown = result.plan;
+      if (workoutPlanDisplay) {
+        if (typeof marked !== "undefined" && marked && typeof marked.parse === "function") {
+          workoutPlanDisplay.innerHTML = marked.parse(result.plan);
+        } else {
+          workoutPlanDisplay.textContent = result.plan;
+        }
+      }
     } catch (err) {
-      alert("Fehler beim Generieren des Workout-Plans: " + err.message);
+      alert("Fehler beim Generieren des Workout-Plans: " + (err && err.message ? err.message : err));
     } finally {
       hideLoader("workout-loader");
     }
   };
 
-  // ======================= NUTRITION =======================
+  // NUTRITION GENERIEREN
   window.generateNutrition = async () => {
     showLoader("nutrition-loader");
     const nutritionPlanDisplay = document.getElementById("nutrition-plan-display");
     if (nutritionPlanDisplay) {
       nutritionPlanDisplay.innerHTML = "";
     }
-
     try {
+      // Session holen
       const { data, error: sessErr } = await supabase.auth.getSession();
       if (sessErr) throw new Error("Fehler beim Authentifizieren: " + sessErr.message);
       const session = data?.session;
       if (!session) throw new Error("Nicht eingeloggt.");
+
+      // Felder validieren
+      const height = document.getElementById("nutrition-height")?.value || "";
+      const weight = document.getElementById("nutrition-weight")?.value || "";
+      const age = document.getElementById("nutrition-age")?.value || "";
+      const gender = document.getElementById("nutrition-gender")?.value || "";
+      const calories = document.getElementById("nutrition-calories")?.value || "";
+      const goal = document.getElementById("nutrition-goal")?.value || "";
+      const additional = document.getElementById("addition")?.value || "";
+
+      if (
+        (age && (isNaN(Number(age)) || Number(age) < 0)) ||
+        (weight && (isNaN(Number(weight)) || Number(weight) < 0)) ||
+        (height && (isNaN(Number(height)) || Number(height) < 0)) ||
+        (calories && (isNaN(Number(calories)) || Number(calories) < 0))
+      ) {
+        throw new Error("Bitte überprüfe deine Angaben. Nur gültige Werte eingeben (keine negativen Zahlen).");
+      }
+
+      const reqBody = {
+        userId: session.user.id,
+        type: "nutrition",
+        data: {
+          height,
+          weight,
+          age,
+          gender,
+          calories,
+          goal,
+          additional
+        }
+      };
 
       const response = await fetch(
         "http://localhost:5678/webhook/e2499cf7-e96f-45e2-ba15-6557cd588bfe",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: session.user.id,
-            type: "nutrition",
-            data: {
-              height: document.getElementById("nutrition-height")?.value || "",
-              weight: document.getElementById("nutrition-weight")?.value || "",
-              age: document.getElementById("nutrition-age")?.value || "",
-              gender: document.getElementById("nutrition-gender")?.value || "",
-              calories: document.getElementById("nutrition-calories")?.value || "",
-              goal: document.getElementById("nutrition-goal")?.value || "",
-              additional: document.getElementById("addition")?.value || ""
-            }
-          })
+          body: JSON.stringify(reqBody)
         }
       );
 
       if (!response.ok) {
-        throw new Error("Nutrition-Plan konnte nicht generiert werden.");
+        let errorMsg = "Nutrition-Plan konnte nicht generiert werden.";
+        try {
+          const respErr = await response.json();
+          if (respErr && respErr.error) errorMsg += " " + respErr.error;
+        } catch (e) {}
+        throw new Error(errorMsg);
       }
 
       const result = await response.json();
-      if (!result.plan) throw new Error("Ungültige Antwort vom Server.");
-
-      nutritionMarkdown = result.plan;
-      if (nutritionPlanDisplay) {
-        nutritionPlanDisplay.innerHTML = typeof marked !== "undefined" ? marked.parse(result.plan) : result.plan;
+      if (!result || typeof result.plan !== "string" || !result.plan.length) {
+        throw new Error("Ungültige Antwort vom Server.");
       }
 
+      window.nutritionMarkdown = result.plan;
+      if (nutritionPlanDisplay) {
+        if (typeof marked !== "undefined" && marked && typeof marked.parse === "function") {
+          nutritionPlanDisplay.innerHTML = marked.parse(result.plan);
+        } else {
+          nutritionPlanDisplay.textContent = result.plan;
+        }
+      }
     } catch (err) {
-      alert("Fehler beim Generieren des Nutrition-Plans: " + err.message);
+      alert("Fehler beim Generieren des Nutrition-Plans: " + (err && err.message ? err.message : err));
     } finally {
       hideLoader("nutrition-loader");
     }
   };
 }
 
+
 // ======================= BESTÄTIGEN =======================
 window.confirmWorkout = async () => {
-  if (!workoutMarkdown) {
+  if (!window.workoutMarkdown) {
     alert("Bitte zuerst einen Workout-Plan generieren.");
     return;
   }
@@ -252,7 +320,7 @@ window.confirmWorkout = async () => {
 
   const { error: upsertError } = await supabase.from("workout_plans")
     .upsert(
-      { user_id: session.user.id, plan: workoutMarkdown },
+      { user_id: session.user.id, plan: window.workoutMarkdown },
       { onConflict: ["user_id"], returning: "representation" }
     );
   if (upsertError) {
@@ -261,11 +329,11 @@ window.confirmWorkout = async () => {
   }
 
   alert("Workout-Plan gespeichert!");
-  window.location.href = "dashboard.html"; // sofort Dashboard anzeigen
+  window.location.href = "dashboard.html";
 };
 
 window.confirmNutrition = async () => {
-  if (!nutritionMarkdown) {
+  if (!window.nutritionMarkdown) {
     alert("Bitte zuerst einen Nutrition-Plan generieren.");
     return;
   }
@@ -284,7 +352,7 @@ window.confirmNutrition = async () => {
 
   const { error: upsertError } = await supabase.from("nutrition_plans")
     .upsert(
-      { user_id: session.user.id, plan: nutritionMarkdown },
+      { user_id: session.user.id, plan: window.nutritionMarkdown },
       { onConflict: ["user_id"], returning: "representation" }
     );
   if (upsertError) {
@@ -293,5 +361,5 @@ window.confirmNutrition = async () => {
   }
 
   alert("Nutrition-Plan gespeichert!");
-  window.location.href = "dashboard.html"; // sofort Dashboard anzeigen
+  window.location.href = "dashboard.html";
 };
