@@ -176,7 +176,7 @@ if (window.location.pathname.includes("generate.html")) {
 
       // fetch URL: ggf. anpassen bei Deployment!
       const response = await fetch(
-        "https://christianduren.app.n8n.cloud/webhook-test/e2499cf7-e96f-45e2-ba15-6557cd588bfe",
+        "https://christianduren.app.n8n.cloud/webhook/c21aeeab-4ac2-4d90-ba1d-47718184ad8f",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -260,7 +260,7 @@ if (window.location.pathname.includes("generate.html")) {
       };
 
       const response = await fetch(
-        "https://christianduren.app.n8n.cloud/webhook-test/c21aeeab-4ac2-4d90-ba1d-47718184ad8f",
+        "https://christianduren.app.n8n.cloud/webhook/e2499cf7-e96f-45e2-ba15-6557cd588bfe",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -363,4 +363,5 @@ window.confirmNutrition = async () => {
   alert("Nutrition-Plan gespeichert!");
   window.location.href = "dashboard.html";
 };
+
 
